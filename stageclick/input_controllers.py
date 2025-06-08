@@ -3,8 +3,10 @@
 # This Source Code Form is subject to the terms of the Mozilla Public
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
-__all__ = ['mouse', 'keyboard', 'MouseButton', 'Key', 'alt_tab', 'alt_n', 'ctrl_up', 'ctrl_c', 'ctrl_down', 'alt_y']
 
+__all__ = ['mouse', 'keyboard', 'MouseButton', 'Key', 'alt_tab', 'alt_n', 'ctrl_up', 'ctrl_c', 'ctrl_down', 'alt_y',
+           'ctrl_a', 'ctrl_s', 'ctrl_right', 'run_listener', 'PauseHandler', 'MouseController', 'KeyboardController',
+           'KeyboardListener']
 import threading
 import time
 
