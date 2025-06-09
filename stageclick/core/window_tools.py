@@ -49,7 +49,7 @@ def safe_grab_clipboard():
             raise ValueError("No image found in clipboard.")
         return image
     except Exception as e:
-        log_colored(f"[Clipboard] Failed to grab image: {e}", "red", "warning")
+        log_colored(f"[Clipboard] Failed to grab image: {e}", "red", "debug")
         return None
 
 
