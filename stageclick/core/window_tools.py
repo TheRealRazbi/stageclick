@@ -246,6 +246,9 @@ class Window:
         ctypes.windll.user32.SetWindowTextW(hwnd, title)
         self.title = title
 
+    def is_running(self):
+        return ctypes.windll.user32.IsWindow(self._window._hWnd) != 0
+
     def debug_screenshot(self, show_instead=False):
         # screenshot = self.screenshot()
         screenshot = None
