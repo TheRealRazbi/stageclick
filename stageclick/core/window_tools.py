@@ -241,6 +241,11 @@ class Window:
             raise TemplateNotFound(f"Template not found in window '{self.title}'")
         return TemplateFound(where=location, screenshot=screenshot)
 
+    def set_title(self, title):
+        hwnd = self._window._hWnd
+        ctypes.windll.user32.SetWindowTextW(hwnd, title)
+        self.title = title
+
     def debug_screenshot(self, show_instead=False):
         # screenshot = self.screenshot()
         screenshot = None
