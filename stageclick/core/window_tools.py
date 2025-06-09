@@ -22,9 +22,12 @@ from termcolor import colored
 
 from stageclick.core.image_processing import ScreenshotArea, match_template, screenshot_area
 from stageclick.core.input_controllers import mouse, keyboard, Key, MouseButton
+from stageclick.log import log_colored, get_logger
 
 __all__ = ["Window", "WindowClosed", "WindowNotFound", "TemplateNotFound", "TemplateFound", "Button",
            "safe_grab_clipboard"]
+
+log = get_logger(__name__)
 
 
 class WindowNotFound(Exception):
@@ -46,7 +49,7 @@ def safe_grab_clipboard():
             raise ValueError("No image found in clipboard.")
         return image
     except Exception as e:
-        print(f"[Clipboard] Failed to grab image: {e}")
+        log_colored(f"[Clipboard] Failed to grab image: {e}", "red", "warning")
         return None
 
 
@@ -250,11 +253,11 @@ class Window:
                     break
                 else:
                     cv2.imwrite("debug_screenshot.png", screenshot)
-                    print("Screenshot saved as 'debug_screenshot.png'")
+                    log_colored("Screenshot saved as 'debug_screenshot.png'", "green")
                     break
 
             except Exception as e:
-                print(f"Error displaying screenshot: {e} | {screenshot}")
+                log_colored(f"Error displaying screenshot: {e} | {screenshot}", "green")
 
             else:
                 break
@@ -352,10 +355,11 @@ class Button:
     def _click(x, y):
         mouse.position = x, y
         colored_x, colored_y = colored(x, "magenta"), colored(y, "magenta")
-        print(f"{colored('Clicking at (', 'blue')}{colored_x}{colored(', ', 'blue')}{colored_y}{colored(')', 'blue')}")
+        log.info(f"{colored('Clicking at (', 'blue')}{colored_x}{colored(', ', 'blue')}"
+                 f"{colored_y}{colored(')', 'blue')}")
         mouse.click(button=MouseButton.left)
 
     @staticmethod
     def _test_position(x, y):
         mouse.position = x, y
-        print(f"Moved mouse to {x}, {y}")
+        log_colored(f"Moved mouse to {x}, {y}", "blue", "info")

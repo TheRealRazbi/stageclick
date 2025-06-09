@@ -19,6 +19,8 @@ from PIL import Image
 from mss import mss
 from screeninfo import get_monitors
 
+from stageclick.log import log_colored
+
 
 @dataclass
 class ScreenshotArea:
@@ -80,7 +82,7 @@ def screenshot_area(area: Union[Sequence, dict, ScreenshotArea] = None) -> np.nd
         try:
             screenshot = sct.grab(area)
         except Exception as e:
-            print(f"Failed to grab screenshot: {e}")
+            log_colored(f"Failed to grab screenshot: {e}", "red", "error")
             raise RuntimeError(f"Screenshot failed with area {area}") from e
         # Convert screenshot to PIL Image for easier manipulation
         # Make sure to use 'BGRX' as the decoder since mss provides BGRA (alpha channel included)
@@ -185,7 +187,8 @@ def create_load_template(folder_root: Union[Path, str], cache_size=10):
             alternate_path = folder_root / f"{path_without_extension}.jpg"
             #  ^ attempt to find .jpg file if .png file is not found
             if alternate_path.exists():
-                print(f"Warning! Template with extension '.png' not found. Using '.jpg' instead. ({name}).")
+                log_colored(f"Warning! Template with extension '.png' not found. Using '.jpg' instead. ({name}).",
+                            "yellow", "warning")
                 template_path = alternate_path
             else:
                 raise FailedToLoadTemplate(f"Error loading template image from path: {template_path}")
