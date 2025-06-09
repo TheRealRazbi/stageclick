@@ -13,7 +13,8 @@ import time
 import pynput
 from pynput.keyboard import Key, Controller as KeyboardController, Listener as KeyboardListener
 from pynput.mouse import Controller as MouseController, Button as MouseButton
-from termcolor import cprint
+
+from stageclick.log import log_colored
 
 
 class PauseHandler:
@@ -32,10 +33,10 @@ class PauseHandler:
                     return
 
                 if self.keep_running.is_set():
-                    cprint("Paused mouse & keyboard".center(70, '-'), "red")
+                    log_colored("Paused mouse & keyboard".center(70, '-'), "red", "info")
                     self.keep_running.clear()
                 else:
-                    cprint("Resumed mouse & keyboard".center(70, '+'), "green")
+                    log_colored("Resumed mouse & keyboard".center(70, '+'), "green", "info")
                     self.keep_running.set()
                 self.last_switch_at = time.time()
 
@@ -128,7 +129,7 @@ def run_listener(on_press, *args, **kwargs) -> None:
         while listener.running:
             time.sleep(0.1)  # keep the main thread alive
     except KeyboardInterrupt:
-        print("Exiting...")
+        log_colored("Exiting...", "red", "info")
     finally:
         listener.stop()
         listener.join()
