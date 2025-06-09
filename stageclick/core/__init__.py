@@ -4,13 +4,12 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-from importlib.metadata import version, PackageNotFoundError
-from . import step_runner
-from . import core
+from .image_processing import *
+from .input_controllers import *
+from .window_tools import *
 
-try:
-    __version__ = version("stage-click")
-except PackageNotFoundError:
-    __version__ = "unknown"
-
-__all__ = ["core", "step_runner", "__version__"]
+__all__ = [
+    *image_processing.__all__,
+    *input_controllers.__all__,
+    *window_tools.__all__,
+]

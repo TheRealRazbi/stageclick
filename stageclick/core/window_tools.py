@@ -20,8 +20,11 @@ import win32process
 from PIL import ImageGrab
 from termcolor import colored
 
-from stageclick.image_processing import ScreenshotArea, match_template, screenshot_area
-from stageclick.input_controllers import mouse, keyboard, Key, MouseButton
+from stageclick.core.image_processing import ScreenshotArea, match_template, screenshot_area
+from stageclick.core.input_controllers import mouse, keyboard, Key, MouseButton
+
+__all__ = ["Window", "WindowClosed", "WindowNotFound", "TemplateNotFound", "TemplateFound", "Button",
+           "safe_grab_clipboard"]
 
 
 class WindowNotFound(Exception):
