@@ -4,6 +4,10 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+__all__ = ["ScreenshotArea", "screenshot_area", "match_template", "match_template_all",
+           "create_load_template", "FailedToLoadTemplate", "get_main_monitor_bounding_box",
+           "split_screenshot_into_rows", "find_color_in_image"]
+
 from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path

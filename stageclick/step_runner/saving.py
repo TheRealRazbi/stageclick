@@ -1,3 +1,9 @@
+# Author: TheRealRazbi (https://github.com/TheRealRazbi)
+# License: MPL-2.0
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
 __all__ = ["save_data_somewhere", "make_permanent", "load_latest_runner_data", "load_data_util", "create_load_command"]
 
 import datetime
