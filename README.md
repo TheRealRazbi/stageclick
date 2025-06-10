@@ -16,5 +16,12 @@ Features:
 pip install stage-click
 ```
 
+## Usage
+```py
+import stageclick
+print(stageclick.__version__)  # will be updated after more implementation is done
+```
+
+
 ## Notes
 It was not tested for linux
