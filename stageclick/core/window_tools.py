@@ -373,9 +373,8 @@ class Button:
     @staticmethod
     def _click(x, y):
         mouse.position = x, y
-        colored_x, colored_y = colored(x, "magenta"), colored(y, "magenta")
-        log.info(f"{colored('Clicking at (', 'blue')}{colored_x}{colored(', ', 'blue')}"
-                 f"{colored_y}{colored(')', 'blue')}")
+        log.info(f"[blue]Clicking at ([/blue][magenta]{x}[/magenta][blue], [/blue]"
+                 f"[magenta]{y}[/magenta][blue])[/blue]")
         mouse.click(button=MouseButton.left)
 
     @staticmethod
