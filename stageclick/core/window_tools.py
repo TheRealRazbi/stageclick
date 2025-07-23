@@ -335,6 +335,8 @@ class Button:
     timeout: float = 10.0
     threshold: float = 0.8
     custom_area: Optional[ScreenshotArea] | tuple[int, int, int, int] = None
+    middle: bool = True
+    _template_width_height: tuple[int, int] = None
 
     def click(self, testing_position=False, fine_if_not_found=False, timeout=None, times=1) -> bool:
         """
@@ -354,8 +356,9 @@ class Button:
                 raise
             return False
         else:
-            x = self.window.left + found.where[0] + self.click_offset[0]
-            y = self.window.top + found.where[1] + self.click_offset[1]
+            _m = self.middle
+            x = self.window.left + found.where[0] + self.click_offset[0] + _m * self.template_w_half
+            y = self.window.top + found.where[1] + self.click_offset[1] + _m * self.template_h_half
             if testing_position:
                 self._test_position(x, y)
             else:
@@ -379,3 +382,27 @@ class Button:
     def _test_position(x, y):
         mouse.position = x, y
         log_colored(f"Moved mouse to {x}, {y}", "blue", "info")
+
+    @property
+    def template_width_height(self):
+        if self._template_width_height is not None:
+            return self._template_width_height
+        width, height = self.template.shape[:2][::-1]
+        self._template_width_height = width, height
+        return self._template_width_height
+
+    @property
+    def template_w(self):
+        return self.template_width_height[0]
+
+    @property
+    def template_h(self):
+        return self.template_width_height[1]
+
+    @property
+    def template_w_half(self):
+        return self.template_w * 0.5
+
+    @property
+    def template_h_half(self):
+        return self.template_h * 0.5
