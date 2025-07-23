@@ -308,6 +308,14 @@ class Window:
     def visible(self):
         return self._window.visible
 
+    @property
+    def window(self):
+        return self._window
+
+    @property
+    def hwnd(self):
+        return self._window._hWnd
+
 
 @dataclass
 class Button:
