@@ -18,7 +18,6 @@ import pygetwindow as gw
 import pyperclip
 import win32process
 from PIL import ImageGrab
-from termcolor import colored
 
 from stageclick.core.image_processing import ScreenshotArea, match_template, screenshot_area
 from stageclick.core.input_controllers import mouse, keyboard, Key, MouseButton
