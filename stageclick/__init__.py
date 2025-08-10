@@ -8,6 +8,13 @@ from importlib.metadata import version, PackageNotFoundError
 from . import step_runner
 from . import core
 
+import warnings
+warnings.warn(
+    "stage-click has been renamed to stageclick. Please reinstall from 'stageclick' instead of 'stage-click'",
+    DeprecationWarning,
+    stacklevel=2
+)
+
 try:
     __version__ = version("stage-click")
 except PackageNotFoundError:

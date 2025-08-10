@@ -13,7 +13,7 @@ Features:
 ## Installation
 
 ```bash
-pip install stage-click
+pip install stageclick
 ```
 
 ## Usage
@@ -24,4 +24,4 @@ print(stageclick.__version__)  # will be updated after more implementation is do
 
 
 ## Notes
-It was not tested for linux
+It has no linux support as of right now, but I am open to contributors, it shouldn't be that hard to add linux support. It just that the library is aimed at harsh GUI conditions and creating "APIs" where apps don't provide that, while linux lets you use the terminal nearly exclusively.

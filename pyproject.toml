@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "stage-click"
-version = "0.1.0.a4"
+version = "0.1.0.a5"
 description = "A template-focused mouse/keyboard controller window automation library for Windows."
 readme = "README.md"
 requires-python = ">=3.11"  # needs to be tested if lower versions also work
