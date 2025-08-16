@@ -99,6 +99,14 @@ def grab_y_n_bool():
     return grab_input_once(lambda n: n in ('y', 'n'), lambda n: True if n == 'y' else False)
 
 
+def grab_accepts_any_and_true_if_n():
+    return grab_input_once(lambda n: True, lambda n: True if n == 'n' else False)
+
+
+def grab_text_min_characters(characters, process_result=lambda n: n):
+    return grab_input_once(lambda n: len(n) >= characters, process_result)
+
+
 @dataclass
 class PickFrom:
     collection: dict[str, any]  # name, value
@@ -124,3 +132,7 @@ class PickFrom:
 
         return grab_input_once(_specific_is_from,
                                lambda n, default=None: n if return_key else self.collection.get(n, default))
+
+    @property
+    def completions(self):
+        return list(self.collection.keys())
