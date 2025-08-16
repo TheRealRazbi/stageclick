@@ -1,22 +1,26 @@
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=69", "wheel", "pybind11>=2.11,<3.0.0", "build"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "stage-click"
-version = "0.1.0.a8"
+version = "0.1.0.a9"
 description = "A template-focused mouse/keyboard controller window automation library for Windows."
 readme = "README.md"
-requires-python = ">=3.11"  # needs to be tested if lower versions also work
+requires-python = ">=3.10"  # needs to be tested if lower versions also work
 license = { file = "LICENSE" }
 authors = [
     { name = "TheRealRazbi", email = "therealrazbi@users.noreply.github.com" }
 ]
 keywords = ["automation", "windows", "template matching", "screen control", "pynput", "pygetwindow", "timing"]
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.11",
-    "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: C++",
+  "Operating System :: Microsoft :: Windows",
     "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)"
 ]
 dependencies = [
