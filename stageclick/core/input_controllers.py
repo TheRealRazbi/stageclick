@@ -6,10 +6,11 @@
 
 __all__ = ['mouse', 'keyboard', 'MouseButton', 'Key', 'alt_tab', 'alt_n', 'ctrl_up', 'ctrl_c', 'ctrl_down', 'alt_y',
            'ctrl_a', 'ctrl_s', 'ctrl_right', 'run_listener', 'PauseHandler', 'MouseController', 'KeyboardController',
-           'KeyboardListener']
+           'KeyboardListener', 'run_print_vk_listener']
 
 import threading
 import time
+from typing import Optional
 
 import pynput
 from pynput.keyboard import Key, Controller as KeyboardController, Listener as KeyboardListener
@@ -44,19 +45,30 @@ class PauseHandler:
     def wait_if_paused(self):
         self.keep_running.wait()
 
+    def set_new_pause_vk(self, vk: Optional[int]):
+        self.toggle_vk = vk
+
 
 pause_handler = PauseHandler()
 
 
 class CustomMouse(MouseController):
-    def click(self, where=None, count=1, skip_click=False, *, button=MouseButton.left):
+    def click(self, where: Optional[tuple[int, int]] = None, count=1, skip_click=False, *, button=MouseButton.left):
         pause_handler.wait_if_paused()
         if where is not None:
             if isinstance(where, int):
                 raise ValueError("'where' parameter should be a tuple of x, y coordinates. Did you forget parentheses?")
-            self.position = where
+            # noinspection PyTypeChecker
+            self.move_to(where)
         if not skip_click:
             super().click(button, count)
+
+    def move_to(self, where: tuple[int, int]):
+        self.position = where
+
+    def test_click(self, where: tuple[int, int]):
+        """It does not click"""
+        self.move_to(where)
 
 
 class CustomKeyboard(KeyboardController):
@@ -135,3 +147,17 @@ def run_listener(on_press, *args, **kwargs) -> None:
     finally:
         listener.stop()
         listener.join()
+
+
+def run_print_vk_listener() -> None:
+    """Used to check what 'virtual key' value your pressed keys have"""
+
+    def _handle_key_press(key):
+        try:
+            from pynput.keyboard import KeyCode
+            if isinstance(key, KeyCode):
+                print(f"char: {key.char} | vk: {key.vk}")
+        except Exception as e:
+            print(e)
+
+    run_listener(_handle_key_press)
