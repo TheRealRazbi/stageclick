@@ -7,6 +7,7 @@
 __all__ = ['mouse', 'keyboard', 'MouseButton', 'Key', 'alt_tab', 'alt_n', 'ctrl_up', 'ctrl_c', 'ctrl_down', 'alt_y',
            'ctrl_a', 'ctrl_s', 'ctrl_right', 'run_listener', 'PauseHandler', 'MouseController', 'KeyboardController',
            'KeyboardListener']
+
 import threading
 import time
 
@@ -48,13 +49,14 @@ pause_handler = PauseHandler()
 
 
 class CustomMouse(MouseController):
-    def click(self, where=None, count=1, *, button=MouseButton.left):
+    def click(self, where=None, count=1, skip_click=False, *, button=MouseButton.left):
         pause_handler.wait_if_paused()
         if where is not None:
             if isinstance(where, int):
                 raise ValueError("'where' parameter should be a tuple of x, y coordinates. Did you forget parentheses?")
             self.position = where
-        super().click(button, count)
+        if not skip_click:
+            super().click(button, count)
 
 
 class CustomKeyboard(KeyboardController):
